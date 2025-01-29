@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h1 class="text-2xl font-bold mb-4 text-center">Weather App</h1>
+        <div class="mb-4">
+            <input type="text" id="cityInput" placeholder="Enter city name" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <button id="getWeatherBtn" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Get Weather</button>
+        <div id="weatherResult" class="mt-4 text-center">
+            <!-- Weather data will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Simulated weather data for a few cities
+        const weatherData = {
+            "new york": { temperature: 15, condition: "Sunny", humidity: 60, wind: 5 },
+            "london": { temperature: 10, condition: "Cloudy", humidity: 75, wind: 10 },
+            "tokyo": { temperature: 20, condition: "Rainy", humidity: 80, wind: 8 },
+            "paris": { temperature: 12, condition: "Partly Cloudy", humidity: 70, wind: 7 },
+            "berlin": { temperature: 9, condition: "Windy", humidity: 65, wind: 12 }
+        };
+
+        document.getElementById('getWeatherBtn').addEventListener('click', function() {
+            const city = document.getElementById('cityInput').value.trim().toLowerCase();
+            const weatherResult = document.getElementById('weatherResult');
+
+            if (weatherData[city]) {
+                const { temperature, condition, humidity, wind } = weatherData[city];
+                weatherResult.innerHTML = `
+                    <h2 class="text-xl font-semibold">${city.toUpperCase()}</h2>
+                    <p class="text-gray-700">Condition: ${condition}</p>
+                    <p class="text-gray-700">Temperature: ${temperature}°C</p>
+                    <p class="text-gray-700">Humidity: ${humidity}%</p>
+                    <p class="text-gray-700">Wind Speed: ${wind} km/h</p>
+                `;
+            } else {
+                weatherResult.innerHTML = `<p class="text-red-500">City not found. Please try again.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
